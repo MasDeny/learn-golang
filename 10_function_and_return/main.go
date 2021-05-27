@@ -19,6 +19,13 @@ func main() {
 	//variadic function dapat digunakan pada slice yang sudah ada sebelumnya
 	slice := []int{50,60,70,80,90}
 	fmt.Println("total yang lain adalah", sum(slice...)) // cara penyebutan function as value dengan contoh lain
+
+	// penggunaan function as parameter
+	sayHelloWithFilters("Budi", filterHello)
+	// atau bisa seperti berikut ini
+	filtered := filterHello
+	sayHelloWithFilters("Anjing", filtered)
+
 }
 
 // return multiple values
@@ -43,4 +50,19 @@ func variadicFunction(numbers ...int) int {
 	}
 	
 	return total
+}
+
+// function as parameter
+// function tidak perlu terlalu panjang atau bisa juga menggunakan type decoration
+func sayHelloWithFilters(name string, filter func(string) string){
+	nameFiltered := filter(name)
+	fmt.Println("Hello",nameFiltered)
+}
+
+func filterHello(name string) string{
+	if name=="Anjing" {
+		return "Mulut Anda Kotor, Jabingan !"
+	} else {
+		return name
+	}
 }
